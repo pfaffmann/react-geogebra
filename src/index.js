@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useScript from './useScript';
 
 function Geogebra(props) {
@@ -7,12 +7,9 @@ function Geogebra(props) {
     id = 'ggb-applet';
   }
 
-  const [loading, setLoading] = useState(true);
-
   function onLoad() {
     //Nachdem das Applet geladen ist wird dies ausgeführt
 
-    setLoading(false);
     appletOnLoad();
   }
 

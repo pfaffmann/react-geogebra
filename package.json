@@ -1,6 +1,6 @@
 {
   "name": "react-geogebra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A react component to add the GeoGebra Math App to your react project.",
   "main": "dist/index.js",
   "scripts": {
