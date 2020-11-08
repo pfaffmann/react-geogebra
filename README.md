@@ -102,7 +102,7 @@ const app2 = window.app2;
 
 ### Evaluating GeoGebra commands
 
-To bind a command (for example creating a Point at specific coordinates) to a button you can create a onClick handler:
+To bind a command (for example creating a Point at specific coordinates) to a button you can create an `onClickHandler`:
 
 ```jsx
 function onClickHandler(){
@@ -118,7 +118,7 @@ function onClickHandler(){
       </button>
 ```
 
-Be sure to not call the `onClickHandler`before the GeoGebra App is loaded.
+Be sure to **not** call the `onClickHandler` before the GeoGebra App is loaded.
 
 ### Register Listeners
 
@@ -132,7 +132,7 @@ The GeoGebra App can call functions whenever an event occurs. To register event 
 
   function registerGeogebraListener() {
     const app = window.ggbApplet;
-    app.registerUpdateListener(positionA); //for more information check the GeoGebra API
+    app.registerUpdateListener(onEvent); //for more information check the GeoGebra API
     console.log('Geogebra Listener registered');
   }
   ...
@@ -141,9 +141,13 @@ The GeoGebra App can call functions whenever an event occurs. To register event 
         width="600"
         height="400"
         appletOnLoad={registerGeogebraListener}
-        enableCAS="false"
       />
 ```
 
-The tutorial used to deploy and publish the package can be found [here](https://medium.com/dailyjs/building-a-react-component-with-webpack-publish-to-npm-deploy-to-github-guide-6927f60b3220).
-I hope you are going to enjoy 'react-geogebra' in your projects 👩‍💻👨‍💻🧑‍💻.
+## Known Bugs
+
+- hot reload doesn't work properly (create-react-app)
+- "Object related" event listeners don't work
+
+The tutorial used to deploy and publish the package can be found [here](https://medium.com/dailyjs/building-a-react-component-with-webpack-publish-to-npm-deploy-to-github-guide-6927f60b3220). <br>
+I hope you are going to enjoy **react-geogebra** in your projects 👩‍💻👨‍💻🧑‍💻.
