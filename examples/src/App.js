@@ -7,7 +7,10 @@ function App() {
 
   function clickHandler() {
     const app = window.appId;
-    app.evalCommand(`A=(${Math.random()},${Math.random()})`);
+    const x = Math.random();
+    const y = Math.random();
+    app.evalCommand(`A=(${x},${y})`);
+    setPosition(`Position A: (${x},${y})`);
   }
 
   function positionA() {
