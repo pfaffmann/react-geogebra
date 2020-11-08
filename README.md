@@ -61,9 +61,9 @@ A Basic example with one Button and one event listener is given in the 'examples
 
 ### Geogebra App Object
 
-To interact with the embedded GeoGebra app you use the applet object.
+To interact with the embedded GeoGebra app you use the _applet object_.
 You can save the object in a variable as soon as the GeoGebra app is **completely loaded**.
-Otherwise the applet object will be undefined.
+Otherwise the _applet object_ will be undefined.
 You can define a function and give a reference to the 'appletOnLoad' prop. This function is called as soon as the GeoGebra App is completely loaded.
 
 ```jsx
@@ -73,8 +73,8 @@ function afterAppIsLoaded(){
 <Geogebra appletOnLoad={afterAppIsLoaded}>
 ```
 
-The name of the applet object depends on the 'id' prop of the `<Geogebra>` component.
-If no 'id' prop is given, you can get the applet object as shown below:
+The name of the _applet object_ depends on the 'id' prop of the `<Geogebra>` component.
+If no 'id' prop is given, you can get the _applet object_ as shown below:
 
 ```jsx
 const app = window.ggbApplet;
@@ -90,7 +90,7 @@ const app = window.app1;
 
 ### Multiple Geogebra App Objects
 
-Multiple applet objects can be stored in variables as shown below:
+Multiple *applet object*s can be stored in variables as shown below:
 
 ```jsx
 <Geogebra id="app1" />
