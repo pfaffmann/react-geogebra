@@ -145,4 +145,5 @@ The GeoGebra App can call functions whenever an event occurs. To register event 
       />
 ```
 
-I hope you enjoy using react-geogebra in your projects 👩‍💻👨‍💻🧑‍💻.
+The tutorial used to deploy and publish the package can be found [here](https://medium.com/dailyjs/building-a-react-component-with-webpack-publish-to-npm-deploy-to-github-guide-6927f60b3220).
+I hope you are going to enjoy 'react-geogebra' in your projects 👩‍💻👨‍💻🧑‍💻.
