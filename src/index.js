@@ -40,5 +40,3 @@ Geogebra.defaultProps = {
 };
 
 export default Geogebra;
-
-export const ggbApplet = window.ggbApplet;
