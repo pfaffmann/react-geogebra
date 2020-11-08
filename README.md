@@ -17,7 +17,7 @@ npm install react-geogebra
 
 Now you can import the package:
 
-```javascript
+```jsx
 import Geogebra from 'react-geogebra';
 ```
 
@@ -25,7 +25,7 @@ import Geogebra from 'react-geogebra';
 
 and use it in your application. For example:
 
-```javascript
+```jsx
 ...
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
 
 To render multiple GeoGebra instances it is necessary to give every instance an individual 'id' prop.
 
-```javascript
+```jsx
 <Geogebra id="app1" />
 <Geogebra id="app2" />
 ```
@@ -66,7 +66,7 @@ You can save the object in a variable as soon as the GeoGebra app is **completel
 Otherwise the applet object will be undefined.
 You can define a function and give a reference to the 'appletOnLoad' prop. This function is called as soon as the GeoGebra App is completely loaded.
 
-```javascript
+```jsx
 function afterAppIsLoaded(){
     //This function will be called after the GeoGebra App is completly loaded.
 }
@@ -76,13 +76,13 @@ function afterAppIsLoaded(){
 The name of the applet object depends on the 'id' prop of the `<Geogebra>` component.
 If no 'id' prop is given, you can get the applet object as shown below:
 
-```javascript
+```jsx
 const app = window.ggbApplet;
 ```
 
 If an 'id' prop is given:
 
-```javascript
+```jsx
 <Geogebra id="app1" />
 ...
 const app = window.app1;
@@ -92,7 +92,7 @@ const app = window.app1;
 
 Multiple applet objects can be stored in variables as shown below:
 
-```javascript
+```jsx
 <Geogebra id="app1" />
 <Geogebra id="app2" />
 ...
@@ -104,7 +104,7 @@ const app2 = window.app2;
 
 To bind a command (for example creating a Point at specific coordinates) to a button you can create a onClick handler:
 
-```javascript
+```jsx
 function onClickHandler(){
     const xCoord = 0.4;
     const yCoord = -1;
@@ -124,7 +124,7 @@ Be sure to not call the `onClickHandler`before the GeoGebra App is loaded.
 
 The GeoGebra App can call functions whenever an event occurs. To register event listeners you use the 'appletOnLoad' prop:
 
-```javascript
+```jsx
   function onEvent() {
     const app = window.ggbApplet;
     console.log(`Position A: (${app.getXcoord('A')},${app.getYcoord('A')})`);
