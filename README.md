@@ -3,6 +3,10 @@
 Hi Everyone. Welcome to my first published package for [react.js](https://reactjs.org/).
 I'm going to show you an easy way to embed [GeoGebra](https://www.geogebra.org/) Maths App to your React project.
 
+## Demo
+
+Try the demo: https://saunaaa.github.io/react-geogebra
+
 ## Installation
 
 In order to start using react-geogebra ensure you install it inside your react project folder as shown below:
