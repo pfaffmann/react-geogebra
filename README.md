@@ -148,6 +148,8 @@ The GeoGebra App can call functions whenever an event occurs. To register event 
 
 - hot reload doesn't work properly (create-react-app)
 - "Object related" event listeners don't work
-  [![NPM](https://nodei.co/npm/react-geogebra.png?compact=true)](https://nodei.co/npm/react-geogebra/)
-  The tutorial used to deploy and publish the package can be found [here](https://medium.com/dailyjs/building-a-react-component-with-webpack-publish-to-npm-deploy-to-github-guide-6927f60b3220). <br>
-  I hope you are going to enjoy **react-geogebra** in your projects 👩‍💻👨‍💻🧑‍💻.
+
+[![NPM](https://nodei.co/npm/react-geogebra.png?compact=true)](https://nodei.co/npm/react-geogebra/)
+
+The tutorial used to deploy and publish the package can be found [here](https://medium.com/dailyjs/building-a-react-component-with-webpack-publish-to-npm-deploy-to-github-guide-6927f60b3220). <br>
+I hope you are going to enjoy **react-geogebra** in your projects 👩‍💻👨‍💻🧑‍💻.
