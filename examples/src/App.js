@@ -31,7 +31,7 @@ function App() {
         height="400"
         appletOnLoad={registerGeogebraListeners}
         enableCAS="false"
-      ></Geogebra>
+      />
       <button type="button" onClick={clickHandler}>
         Set 'A'
       </button>
