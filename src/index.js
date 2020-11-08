@@ -31,9 +31,9 @@ function Geogebra(props) {
 }
 
 Geogebra.defaultProps = {
-  appName: 'graphing',
-  width: 1200,
-  height: 800,
+  appName: 'classic',
+  width: 800,
+  height: 600,
   showToolBar: false,
   showAlgebraInput: false,
   showMenuBar: false,
