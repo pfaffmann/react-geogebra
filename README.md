@@ -90,7 +90,7 @@ const app = window.app1;
 
 ### Multiple Geogebra App Objects
 
-Multiple *applet object*s can be stored in variables as shown below:
+Multiple _applet objects_ can be stored in variables as shown below:
 
 ```jsx
 <Geogebra id="app1" />
