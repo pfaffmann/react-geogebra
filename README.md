@@ -52,7 +52,7 @@ To render multiple GeoGebra instances it is necessary to give every instance an 
 
 ## GeoGebra parameters
 
-A list of all possible props is available at the [GeoGebra-Website](https://wiki.geogebra.org/en/Reference:GeoGebra_App_Parameters).
+A list of all possible props is available at the [GeoGebra-website](https://wiki.geogebra.org/en/Reference:GeoGebra_App_Parameters).
 
 ## GeoGebra App API
 
