@@ -26,11 +26,10 @@ function App() {
       <h1>Set Point 'A' and look what happens if you move it</h1>
       <Geogebra
         id="appId"
-        appName="geometry"
+        appName="graphing"
         width="600"
         height="400"
         appletOnLoad={registerGeogebraListeners}
-        enableCAS="false"
       />
       <button type="button" onClick={clickHandler}>
         Set 'A'
