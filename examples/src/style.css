@@ -21,11 +21,11 @@ code {
 }
 
 button {
-  margin: 0.25rem;
+  margin: 0.5rem;
 }
 
 .top-left {
   position: absolute;
-  top: 1rem;
+  top: 1.15rem;
   left: 0;
 }

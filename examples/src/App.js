@@ -44,7 +44,7 @@ function App() {
         <a href="https://github.com/saunaaa/react-geogebra">
           <button className="mdc-button foo-button" title="back to github">
             <div className="mdc-button__ripple"></div>
-            <span class="material-icons">chevron_left</span>
+            <span className="material-icons">chevron_left</span>
           </button>
         </a>
       </div>
@@ -55,6 +55,7 @@ function App() {
         appName="graphing"
         width="600"
         height="400"
+        enableUndoRedo="false"
         appletOnLoad={registerGeogebraListeners}
       />
       <div className="button-row">
