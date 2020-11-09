@@ -4,13 +4,24 @@ import './style.css';
 
 function App() {
   const [position, setPosition] = useState('Position A: (?,?)');
+  const [appLoaded, setAppLoaded] = useState(false);
 
   function clickHandler() {
     const app = window.appId;
-    const x = Math.round(Math.random() * 10) / 10;
-    const y = Math.round(Math.random() * 10) / 10;
+    const min = -3;
+    const max = 2;
+    const x = Math.round(Math.random() * (max - min + 1) + min);
+    const y = Math.round(Math.random() * (max - min + 1) + min);
     app.evalCommand(`A=(${x},${y})`);
     setPosition(`Position A: (${x},${y})`);
+  }
+
+  function clickDeleteHandler() {
+    const app = window.appId;
+    if (app.exists('A')) {
+      app.deleteObject('A');
+      setPosition(`Position A: (?,?)`);
+    }
   }
 
   function positionA() {
@@ -21,7 +32,10 @@ function App() {
   function registerGeogebraListeners() {
     const app = window.appId;
     app.registerUpdateListener(positionA);
+    app.setPerspective('G');
+    app.setGridVisible(true);
     console.log('Geogebra Listeners registered');
+    setAppLoaded(true);
   }
 
   return (
@@ -34,10 +48,25 @@ function App() {
         height="400"
         appletOnLoad={registerGeogebraListeners}
       />
-      <button type="button" onClick={clickHandler}>
-        Set 'A'
-      </button>
-      <p>{position}</p>
+      <div className="button-row">
+        <button
+          className="mdc-button mdc-button--raised foo-button"
+          onClick={clickHandler}
+          disabled={!appLoaded}
+        >
+          <div className="mdc-button__ripple"></div>
+          <span className="mdc-button__label">set 'A'</span>
+        </button>
+        <button
+          className="mdc-button mdc-button--outlined foo-button"
+          onClick={clickDeleteHandler}
+          disabled={!appLoaded}
+        >
+          <div className="mdc-button__ripple"></div>
+          <span className="mdc-button__label">delete 'A'</span>
+        </button>
+      </div>
+      {position}
     </div>
   );
 }
