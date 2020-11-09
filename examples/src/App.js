@@ -40,7 +40,16 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Set Point 'A' and look what happens if you move it</h1>
+      <div className="top-left">
+        <a href="https://github.com/saunaaa/react-geogebra">
+          <button className="mdc-button foo-button" title="back to github">
+            <div className="mdc-button__ripple"></div>
+            <span class="material-icons">chevron_left</span>
+          </button>
+        </a>
+      </div>
+      <h1>react-geogebra Demo</h1>
+      set Point 'A' and look what happens if you move it
       <Geogebra
         id="appId"
         appName="graphing"
