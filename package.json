@@ -23,11 +23,11 @@
   },
   "keywords": [
     "react",
-    "geogebra",
+    "GeoGebra",
     "math"
   ],
   "author": "Christoph Pfaffmann",
-  "license": "ISC",
+  "license": "ISC AND SEE in License-GeoGEbra.html",
   "peerDependencies": {
     "react": "16.13.1",
     "react-dom": "16.13.1"
