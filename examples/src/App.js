@@ -97,7 +97,11 @@ function App() {
       </div>
 
       <div className="egg">
-        <button className="egg-btn" onClick={onEggHandler}></button>
+        <button
+          className="egg-btn"
+          onClick={onEggHandler}
+          title="wait!, what's that?"
+        ></button>
       </div>
     </div>
   );
