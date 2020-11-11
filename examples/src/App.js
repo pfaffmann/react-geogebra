@@ -55,7 +55,7 @@ function App() {
       <div className="top-left">
         <button
           className="mdc-button foo-button"
-          title="back to github"
+          title="back"
           onClick={onChivron}
         >
           <div className="mdc-button__ripple"></div>
