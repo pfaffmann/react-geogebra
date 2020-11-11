@@ -47,7 +47,7 @@ function App() {
   }
 
   function onChivron() {
-    document.location.replace('https://github.com/saunaaa/react-geogebra');
+    window.history.back();
   }
 
   return (
