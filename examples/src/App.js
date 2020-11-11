@@ -5,6 +5,7 @@ import './style.css';
 function App() {
   const [position, setPosition] = useState('Position A: (?,?)');
   const [appLoaded, setAppLoaded] = useState(false);
+  const [easterEgg, setEasterEgg] = useState(false);
 
   function clickHandler() {
     const app = window.appId;
@@ -34,49 +35,70 @@ function App() {
     app.registerUpdateListener(positionA);
     app.setPerspective('G');
     app.setGridVisible(true);
+    app.setVisible('pic2', false);
     console.log('Geogebra Listeners registered');
     setAppLoaded(true);
+  }
+
+  function onEggHandler() {
+    const app = window.appId;
+    app.setVisible('pic2', !easterEgg);
+    setEasterEgg(!easterEgg);
+  }
+
+  function onChivron() {
+    document.location.replace('https://github.com/saunaaa/react-geogebra');
   }
 
   return (
     <div className="App">
       <div className="top-left">
-        <a href="https://github.com/saunaaa/react-geogebra">
-          <button className="mdc-button foo-button" title="back to github">
+        <button
+          className="mdc-button foo-button"
+          title="back to github"
+          onClick={onChivron}
+        >
+          <div className="mdc-button__ripple"></div>
+          <span className="material-icons">chevron_left</span>
+        </button>
+      </div>
+
+      <div className="demo">
+        <h1>react-geogebra Demo</h1>
+        set Point 'A' and look what happens if you move it
+        <Geogebra
+          id="appId"
+          appName="graphing"
+          material_id="xu9j3sgq"
+          width="600"
+          height="400"
+          enableUndoRedo="false"
+          appletOnLoad={registerGeogebraListeners}
+        />
+        <div className="button-row">
+          <button
+            className="mdc-button mdc-button--raised foo-button"
+            onClick={clickHandler}
+            disabled={!appLoaded}
+          >
             <div className="mdc-button__ripple"></div>
-            <span className="material-icons">chevron_left</span>
+            <span className="mdc-button__label">set 'A'</span>
           </button>
-        </a>
+          <button
+            className="mdc-button mdc-button--outlined foo-button"
+            onClick={clickDeleteHandler}
+            disabled={!appLoaded}
+          >
+            <div className="mdc-button__ripple"></div>
+            <span className="mdc-button__label">delete 'A'</span>
+          </button>
+        </div>
+        {position}
       </div>
-      <h1>react-geogebra Demo</h1>
-      set Point 'A' and look what happens if you move it
-      <Geogebra
-        id="appId"
-        appName="graphing"
-        width="600"
-        height="400"
-        enableUndoRedo="false"
-        appletOnLoad={registerGeogebraListeners}
-      />
-      <div className="button-row">
-        <button
-          className="mdc-button mdc-button--raised foo-button"
-          onClick={clickHandler}
-          disabled={!appLoaded}
-        >
-          <div className="mdc-button__ripple"></div>
-          <span className="mdc-button__label">set 'A'</span>
-        </button>
-        <button
-          className="mdc-button mdc-button--outlined foo-button"
-          onClick={clickDeleteHandler}
-          disabled={!appLoaded}
-        >
-          <div className="mdc-button__ripple"></div>
-          <span className="mdc-button__label">delete 'A'</span>
-        </button>
+
+      <div className="egg">
+        <button className="egg-btn" onClick={onEggHandler}></button>
       </div>
-      {position}
     </div>
   );
 }
