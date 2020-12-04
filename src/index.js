@@ -9,7 +9,7 @@ function Geogebra(props) {
 
   function onLoad() {
     //Nachdem das Applet geladen ist wird dies ausgeführt
-
+    console.log('onLoad triggered');
     appletOnLoad();
   }
 
