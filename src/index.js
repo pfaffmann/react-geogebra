@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useScript from './useScript';
+
+const storage = sessionStorage;
 
 function Geogebra(props) {
   let { id, appletOnLoad } = props;
@@ -7,9 +9,35 @@ function Geogebra(props) {
     id = 'ggb-applet';
   }
 
+  const [state, setState] = useState(null);
+  const [applet, setApplet] = useState(null);
+
+  useEffect(() => {
+    const storedBase = storage.getItem(id);
+    if (storedBase) {
+      applet && applet.setBase64(storedBase);
+    }
+  }, [applet]);
+
   function onLoad() {
     //Nachdem das Applet geladen ist wird dies ausgeführt
-    console.log('onLoad triggered');
+    //console.log('onLoad triggered');
+
+    // Hier UpdateCheckern
+    //console.log(window[id]); //applet Object
+    setApplet(window[id]);
+    const app = window[id];
+    app.registerUpdateListener(() => {
+      app.getBase64((base) => {
+        setState(base);
+        try {
+          storage.setItem(id, base);
+        } catch (error) {
+          console.error(error.message);
+        }
+      });
+    });
+
     appletOnLoad();
   }
 
