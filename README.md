@@ -152,8 +152,14 @@ The GeoGebra App can call functions whenever an event occurs. To register event 
 - "Object related" event listeners don't work
 
 ## License
+
 Check out the GeoGebra license agreement on their webpage. <br>
 https://www.geogebra.org/license
+
+## Support Me?
+
+just buy me a coffee ☕️ <br>
+<a href="https://www.buymeacoffee.com/saunaaa" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 <hr>
 

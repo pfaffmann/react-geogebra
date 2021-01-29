@@ -4,9 +4,11 @@ export const loadScript = (url) =>
     if (!document) {
       reject(new Error('Document was not defined'));
     }
+
     const tag = document.getElementsByTagName('script')[0];
     const script = document.createElement('script');
 
+    script.crossOrigin = '';
     script.type = 'text/javascript';
     script.src = url;
     script.onreadystatechange = () => {
@@ -26,6 +28,7 @@ export const loadScript = (url) =>
     };
 
     if (tag.parentNode != null) {
+      //tag.parentNode.insertBefore(script, tag);
       tag.parentNode.insertBefore(script, tag);
     }
   });
