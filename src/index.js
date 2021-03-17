@@ -1,70 +1,123 @@
 import React, { useEffect, useState } from 'react';
-import useScript from './useScript';
 
-const storage = sessionStorage;
+const loadScript = (url, id) =>
+  new Promise((resolve, reject) => {
+    let ready = false;
+    if (!document) {
+      reject(new Error('Document was not defined'));
+    }
 
-function Geogebra(props) {
-  let { id, appletOnLoad } = props;
+    const tag = document.getElementsByTagName('script')[0];
+    const script = document.createElement('script');
+
+    script.crossOrigin = '';
+    script.id = `${id}-script`;
+    script.type = 'text/javascript';
+    script.src = url;
+    script.onreadystatechange = () => {
+      if (!ready) {
+        ready = true;
+        resolve(script);
+      }
+    };
+    script.onload = script.onreadystatechange;
+
+    script.onerror = (msg) => {
+      reject(new Error('Error loading script.'));
+    };
+
+    script.onabort = (msg) => {
+      reject(new Error('Script loading aborted.'));
+    };
+
+    if (tag.parentNode != null) {
+      //tag.parentNode.insertBefore(script, tag);
+      tag.parentNode.insertBefore(script, tag);
+    }
+  });
+
+const removeScript = (id) => {
+  new Promise((resolve, reject) => {
+    const script = document.getElementById(`${id}-script`);
+    if (script) {
+      script.remove();
+      resolve();
+    } else {
+      reject(new Error('Error removing script.'));
+    }
+  });
+};
+
+const Geogebra = (props) => {
+  let { id, LoadComponent, onReady, appletOnLoad, debug } = props;
   if (!id) {
     id = 'ggb-applet';
   }
+  if (!debug) {
+    debug = false;
+  }
+  //If a JSX Component is not given as a prop, use h3 with children
+  if (!LoadComponent) {
+    LoadComponent = ({ children }) => <h3>{children}</h3>;
+  }
 
-  const [state, setState] = useState(null);
-  const [applet, setApplet] = useState(null);
+  const url = 'https://geogebra.org/apps/deployggb.js';
+  const [deployggbLoaded, setDeployggbLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  //gets called by GeoGebra after the Applet is ready
+  const onAppletReady = () => {
+    if (appletOnLoad) appletOnLoad();
+    if (onReady) onReady();
+    debug && console.log(`Applet with id "${id}" is ready`);
+  };
 
   useEffect(() => {
-    const storedBase = storage.getItem(id);
-    if (storedBase) {
-      applet && applet.setBase64(storedBase);
-    }
-  }, [applet]);
+    !deployggbLoaded &&
+      loadScript(url, id)
+        .then((script) => {
+          debug &&
+            console.log(`script from "${url}" succesfull loaded into the DOM`);
+          setDeployggbLoaded(true);
+        })
+        .catch((err) => console.error(err));
+    return () => {
+      setDeployggbLoaded(false);
+      //removeScript(id);
+      const tag = document.getElementById(`${id}-holder`);
+      if (tag) {
+        tag.lastChild.textContent = '';
+      }
+    };
+  }, []);
 
-  function onLoad() {
-    //Nachdem das Applet geladen ist wird dies ausgeführt
-    //console.log('onLoad triggered');
-
-    // Hier UpdateCheckern
-    //console.log(window[id]); //applet Object
-    setApplet(window[id]);
-    const app = window[id];
-    app.registerUpdateListener(() => {
-      app.getBase64((base) => {
-        setState(base);
-        try {
-          storage.setItem(id, base);
-        } catch (error) {
-          console.error(error.message);
-        }
-      });
-    });
-
-    appletOnLoad();
-  }
-
-  function loadGeogebraApp() {
-    //console.log(id);
-    const parameter = JSON.parse(JSON.stringify(props));
-    parameter.appletOnLoad = onLoad;
-    //console.log(parameter);
-    const ggbApp = new window.GGBApplet(parameter, true);
-    window.addEventListener('load', () => {
+  useEffect(() => {
+    if (window.GGBApplet) {
+      const parameter = JSON.parse(JSON.stringify(props));
+      parameter.appletOnLoad = onAppletReady;
+      const ggbApp = new window.GGBApplet(parameter, true);
       ggbApp.inject(id);
-    });
-  }
+      setLoading(false);
+      debug &&
+        console.log(`applet with id "${id}" succesfull injected into the DOM`);
+    }
+  }, [deployggbLoaded]);
 
-  const geogebraUrl = 'https://geogebra.org/apps/deployggb.js';
-  useScript(geogebraUrl, loadGeogebraApp);
-
-  return <div id={id}></div>;
-}
+  return (
+    <div id={`${id}-holder`}>
+      {loading && <LoadComponent>Loading</LoadComponent>}
+      <div id={id}></div>
+    </div>
+  );
+};
 
 Geogebra.defaultProps = {
   appName: 'classic',
   width: 800,
   height: 600,
-  showToolBar: false,
-  showAlgebraInput: false,
-  showMenuBar: false,
+  showToolBar: true,
+  showAlgebraInput: true,
+  showMenuBar: true,
 };
 
 export default Geogebra;

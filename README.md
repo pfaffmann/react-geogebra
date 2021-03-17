@@ -1,7 +1,8 @@
 # React GeoGebra Component
 
 Hi Everyone. Welcome to my first published package for [react.js](https://reactjs.org/).
-I'm going to show you an easy way to embed [GeoGebra](https://www.geogebra.org/) Maths App to your React project.
+I'm going to show you an easy way to embed [GeoGebra](https://www.geogebra.org/) Maths App to your React project.<br />
+This is not an official GeoGebra-project.
 
 [![NPM](https://nodei.co/npm/react-geogebra.png?compact=true)](https://nodei.co/npm/react-geogebra/)
 
@@ -52,9 +53,40 @@ To render multiple GeoGebra instances it is necessary to give every instance an 
 <Geogebra id="app2" />
 ```
 
-## GeoGebra parameters
+## Props and Parameters
 
-A list of all possible props is available at the [GeoGebra-website](https://wiki.geogebra.org/en/Reference:GeoGebra_App_Parameters).
+### Default Props
+
+```jsx
+Geogebra.defaultProps = {
+  appName: 'classic',
+  width: 800,
+  height: 600,
+  showToolBar: true,
+  showAlgebraInput: true,
+  showMenuBar: true,
+};
+```
+
+### Added Props
+
+```jsx
+<Geogebra
+  debug
+  onReady={readyHandler}
+  LoadComponent={() => <h1>Loading</h1>}
+></Geogebra>
+```
+
+| Prop          | Type            | Description                                           |
+| ------------- | --------------- | ----------------------------------------------------- |
+| debug         | boolean         | true: additional logs in console                      |
+| onReady       | ()=>void        | is called after appletOnLoad                          |
+| LoadComponent | ()=>JSX.Element | is shown before the applet gets injected into the DOM |
+
+### GeoGebra Props
+
+A list of the GeoGebra props is available at the [GeoGebra-website](https://wiki.geogebra.org/en/Reference:GeoGebra_App_Parameters).
 
 ## GeoGebra App API
 
