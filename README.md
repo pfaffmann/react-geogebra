@@ -75,14 +75,16 @@ Geogebra.defaultProps = {
   debug
   onReady={readyHandler}
   LoadComponent={() => <h1>Loading</h1>}
+  watchedProps=['width', 'height']
 ></Geogebra>
 ```
 
-| Prop          | Type            | Description                                           |
-| ------------- | --------------- | ----------------------------------------------------- |
-| debug         | boolean         | true: additional logs in console                      |
-| onReady       | ()=>void        | is called after appletOnLoad                          |
-| LoadComponent | ()=>JSX.Element | is shown before the applet gets injected into the DOM |
+| Prop          | Type            | Description                                              |
+| ------------- | --------------- | -------------------------------------------------------- |
+| debug         | boolean         | true: additional logs in console                         |
+| onReady       | ()=>void        | is called after appletOnLoad                             |
+| LoadComponent | ()=>JSX.Element | is shown before the applet gets injected into the DOM    |
+| watchedProps  | string[]        | forces the applet to reload if a watched prop is changed |
 
 ### GeoGebra Props
 

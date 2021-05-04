@@ -49,7 +49,7 @@ const removeScript = (id) => {
 };
 
 const Geogebra = (props) => {
-  let { id, LoadComponent, onReady, appletOnLoad, debug } = props;
+  let { id, LoadComponent, onReady, appletOnLoad, debug, watchedProps } = props;
   if (!id) {
     id = 'ggb-applet';
   }
@@ -64,7 +64,7 @@ const Geogebra = (props) => {
   const url = 'https://geogebra.org/apps/deployggb.js';
   const [deployggbLoaded, setDeployggbLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [watch, setWatch] = useState([]);
   //gets called by GeoGebra after the Applet is ready
   const onAppletReady = () => {
     if (appletOnLoad) appletOnLoad();
@@ -81,6 +81,7 @@ const Geogebra = (props) => {
           setDeployggbLoaded(true);
         })
         .catch((err) => console.error(err));
+
     return () => {
       setDeployggbLoaded(false);
       //removeScript(id);
@@ -92,6 +93,10 @@ const Geogebra = (props) => {
   }, []);
 
   useEffect(() => {
+    setWatch(watchedProps.map((key) => props[key]));
+  }, [props]);
+
+  useEffect(() => {
     if (window.GGBApplet) {
       const parameter = JSON.parse(JSON.stringify(props));
       parameter.appletOnLoad = onAppletReady;
@@ -101,7 +106,13 @@ const Geogebra = (props) => {
       debug &&
         console.log(`applet with id "${id}" succesfull injected into the DOM`);
     }
-  }, [deployggbLoaded]);
+    return () => {
+      const tag = document.getElementById(`${id}-holder`);
+      if (tag) {
+        tag.lastChild.textContent = '';
+      }
+    };
+  }, [deployggbLoaded, ...watch]);
 
   return (
     <div id={`${id}-holder`}>

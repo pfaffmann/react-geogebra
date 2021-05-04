@@ -6,6 +6,7 @@ function App() {
   const [position, setPosition] = useState('Position A: (?,?)');
   const [appLoaded, setAppLoaded] = useState(false);
   const [easterEgg, setEasterEgg] = useState(false);
+  const [width, setWidth] = useState(600);
 
   function clickHandler() {
     const app = window.appId;
@@ -67,13 +68,15 @@ function App() {
         <h1>react-geogebra Demo</h1>
         set Point 'A' and look what happens if you move it
         <Geogebra
+          debug
           id="appId"
-          appName="graphing"
           material_id="xu9j3sgq"
-          width="600"
+          appName="graphing"
+          width={width}
           height="400"
           enableUndoRedo="false"
           appletOnLoad={registerGeogebraListeners}
+          watchedProps={['width']}
         />
         <div className="button-row">
           <button
@@ -91,6 +94,30 @@ function App() {
           >
             <div className="mdc-button__ripple"></div>
             <span className="mdc-button__label">delete 'A'</span>
+          </button>
+          <button
+            className="mdc-button mdc-button--outlined foo-button"
+            onClick={() => {
+              const newWidth = width < 1000 ? width + 100 : 1000;
+              setWidth(newWidth);
+              console.log(newWidth);
+            }}
+            disabled={!appLoaded}
+          >
+            <div className="mdc-button__ripple"></div>
+            <span className="mdc-button__label">width++</span>
+          </button>
+          <button
+            className="mdc-button mdc-button--outlined foo-button"
+            onClick={() => {
+              const newWidth = width > 100 ? width - 100 : 100;
+              setWidth(newWidth);
+              console.log(newWidth);
+            }}
+            disabled={!appLoaded}
+          >
+            <div className="mdc-button__ripple"></div>
+            <span className="mdc-button__label">width--</span>
           </button>
         </div>
         {position}
