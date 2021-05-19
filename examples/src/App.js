@@ -76,7 +76,6 @@ function App() {
           height="400"
           enableUndoRedo="false"
           appletOnLoad={registerGeogebraListeners}
-          watchedProps={['width']}
         />
         <div className="button-row">
           <button

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const loadScript = (url, id) =>
   new Promise((resolve, reject) => {
@@ -49,7 +49,9 @@ const removeScript = (id) => {
 };
 
 const Geogebra = (props) => {
-  let { id, LoadComponent, onReady, appletOnLoad, debug, watchedProps } = props;
+  const refProps = useRef(props);
+
+  let { id, LoadComponent, onReady, appletOnLoad, debug } = refProps.current;
   if (!id) {
     id = 'ggb-applet';
   }
@@ -64,7 +66,7 @@ const Geogebra = (props) => {
   const url = 'https://geogebra.org/apps/deployggb.js';
   const [deployggbLoaded, setDeployggbLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [watch, setWatch] = useState([]);
+  const [watchPropsChange, setWatchPropsChange] = useState(false);
   //gets called by GeoGebra after the Applet is ready
   const onAppletReady = () => {
     if (appletOnLoad) appletOnLoad();
@@ -93,16 +95,38 @@ const Geogebra = (props) => {
   }, []);
 
   useEffect(() => {
-    setWatch(watchedProps.map((key) => props[key]));
+    const propsChanged = Object.keys(props).map((key) => {
+      console.log(
+        refProps.current[key] !== props[key],
+        refProps.current[key],
+        props[key]
+      );
+      if (
+        typeof refProps.current[key] === 'function' &&
+        typeof props[key] === 'function'
+      )
+        return false;
+      if (
+        typeof refProps.current[key] === 'object' &&
+        typeof props[key] === 'object'
+      )
+        return false;
+      return refProps.current[key] !== props[key];
+    });
+    if (propsChanged.some((element) => element === true)) {
+      refProps.current = props;
+      setWatchPropsChange(true);
+    }
   }, [props]);
 
   useEffect(() => {
     if (window.GGBApplet) {
-      const parameter = JSON.parse(JSON.stringify(props));
+      const parameter = JSON.parse(JSON.stringify(refProps.current));
       parameter.appletOnLoad = onAppletReady;
       const ggbApp = new window.GGBApplet(parameter, true);
       ggbApp.inject(id);
       setLoading(false);
+      setWatchPropsChange(false);
       debug &&
         console.log(`applet with id "${id}" succesfull injected into the DOM`);
     }
@@ -112,7 +136,7 @@ const Geogebra = (props) => {
         tag.lastChild.textContent = '';
       }
     };
-  }, [deployggbLoaded, ...watch]);
+  }, [deployggbLoaded, watchPropsChange]);
 
   return (
     <div id={`${id}-holder`}>

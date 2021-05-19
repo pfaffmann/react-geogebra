@@ -54,7 +54,6 @@ export interface Props {
   debug?: boolean;
   onReady?: () => void;
   LoadComponent?: () => JSX.Element;
-  watchedProps?: string[];
 }
 declare function Geogebra(props: Props): JSX.Element;
 declare namespace Geogebra {
