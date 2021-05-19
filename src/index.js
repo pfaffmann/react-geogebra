@@ -96,11 +96,6 @@ const Geogebra = (props) => {
 
   useEffect(() => {
     const propsChanged = Object.keys(props).map((key) => {
-      console.log(
-        refProps.current[key] !== props[key],
-        refProps.current[key],
-        props[key]
-      );
       if (
         typeof refProps.current[key] === 'function' &&
         typeof props[key] === 'function'
