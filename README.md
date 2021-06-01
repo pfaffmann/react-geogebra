@@ -78,11 +78,12 @@ Geogebra.defaultProps = {
 ></Geogebra>
 ```
 
-| Prop          | Type            | Description                                           |
-| ------------- | --------------- | ----------------------------------------------------- |
-| debug         | boolean         | true: additional logs in console                      |
-| onReady       | ()=>void        | is called after appletOnLoad                          |
-| LoadComponent | ()=>JSX.Element | is shown before the applet gets injected into the DOM |
+| Prop               | Type            | Description                                            |
+| ------------------ | --------------- | ------------------------------------------------------ |
+| debug              | boolean         | true: additional logs in console                       |
+| reloadOnPropChange | boolean         | true: every prop change fires a rerender of the applet |
+| onReady            | ()=>void        | is called after appletOnLoad                           |
+| LoadComponent      | ()=>JSX.Element | is shown before the applet gets injected into the DOM  |
 
 ### GeoGebra Props
 

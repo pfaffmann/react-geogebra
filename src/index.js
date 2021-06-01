@@ -51,7 +51,8 @@ const removeScript = (id) => {
 const Geogebra = (props) => {
   const refProps = useRef(props);
 
-  let { id, LoadComponent, onReady, appletOnLoad, debug } = refProps.current;
+  let { id, LoadComponent, onReady, appletOnLoad, debug, reloadOnPropChange } =
+    refProps.current;
   if (!id) {
     id = 'ggb-applet';
   }
@@ -93,27 +94,27 @@ const Geogebra = (props) => {
       }
     };
   }, []);
-
-  useEffect(() => {
-    const propsChanged = Object.keys(props).map((key) => {
-      if (
-        typeof refProps.current[key] === 'function' &&
-        typeof props[key] === 'function'
-      )
-        return false;
-      if (
-        typeof refProps.current[key] === 'object' &&
-        typeof props[key] === 'object'
-      )
-        return false;
-      return refProps.current[key] !== props[key];
-    });
-    if (propsChanged.some((element) => element === true)) {
-      refProps.current = props;
-      setWatchPropsChange(true);
-    }
-  }, [props]);
-
+  if (reloadOnPropChange) {
+    useEffect(() => {
+      const propsChanged = Object.keys(props).map((key) => {
+        if (
+          typeof refProps.current[key] === 'function' &&
+          typeof props[key] === 'function'
+        )
+          return false;
+        if (
+          typeof refProps.current[key] === 'object' &&
+          typeof props[key] === 'object'
+        )
+          return false;
+        return refProps.current[key] !== props[key];
+      });
+      if (propsChanged.some((element) => element === true)) {
+        refProps.current = props;
+        setWatchPropsChange(true);
+      }
+    }, [props]);
+  }
   useEffect(() => {
     if (window.GGBApplet) {
       const parameter = JSON.parse(JSON.stringify(refProps.current));
@@ -148,6 +149,7 @@ Geogebra.defaultProps = {
   showToolBar: true,
   showAlgebraInput: true,
   showMenuBar: true,
+  reloadOnPropChange: false,
 };
 
 export default Geogebra;

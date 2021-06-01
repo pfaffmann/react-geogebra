@@ -52,6 +52,7 @@ export interface Props {
   keyboardType?: string;
   //custom props
   debug?: boolean;
+  reloadOnPropChange?: boolean;
   onReady?: () => void;
   LoadComponent?: () => JSX.Element;
 }
@@ -64,6 +65,7 @@ declare namespace Geogebra {
     showToolBar: boolean;
     showAlgebraInput: boolean;
     showMenuBar: boolean;
+    reloadOnPropChange: boolean;
   };
 }
 export default Geogebra;
