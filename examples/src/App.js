@@ -33,7 +33,12 @@ function App() {
 
   function registerGeogebraListeners() {
     const app = window.appId;
+    // app.evalCommand('A=(0,0)');
+    // app.registerObjectClickListener('A', () => {
+    //   alert('A clicked');
+    // });
     app.registerUpdateListener(positionA);
+
     app.setPerspective('G');
     app.setGridVisible(true);
     app.setVisible('pic2', false);

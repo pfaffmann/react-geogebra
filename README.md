@@ -179,10 +179,13 @@ The GeoGebra App can call functions whenever an event occurs. To register event 
       />
 ```
 
+#### Object related Listener
+
+"Object related" event listeners only work if the object is defined before the listener is registered.
+
 ## Known Bugs
 
 - hot reload doesn't work properly (create-react-app)
-- "Object related" event listeners don't work
 
 ## License
 
