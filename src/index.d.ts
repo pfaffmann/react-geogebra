@@ -1,5 +1,3 @@
-/// <reference types="react" />
-
 export interface Props {
   id: string;
   appletOnLoad: () => void;
