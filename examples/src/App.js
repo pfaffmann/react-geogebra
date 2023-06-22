@@ -99,30 +99,6 @@ function App() {
             <div className="mdc-button__ripple"></div>
             <span className="mdc-button__label">delete 'A'</span>
           </button>
-          <button
-            className="mdc-button mdc-button--outlined foo-button"
-            onClick={() => {
-              const newWidth = width < 1000 ? width + 100 : 1000;
-              setWidth(newWidth);
-              console.log(newWidth);
-            }}
-            disabled={!appLoaded}
-          >
-            <div className="mdc-button__ripple"></div>
-            <span className="mdc-button__label">width++</span>
-          </button>
-          <button
-            className="mdc-button mdc-button--outlined foo-button"
-            onClick={() => {
-              const newWidth = width > 100 ? width - 100 : 100;
-              setWidth(newWidth);
-              console.log(newWidth);
-            }}
-            disabled={!appLoaded}
-          >
-            <div className="mdc-button__ripple"></div>
-            <span className="mdc-button__label">width--</span>
-          </button>
         </div>
         {position}
       </div>
