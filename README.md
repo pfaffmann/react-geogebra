@@ -8,7 +8,7 @@ This is not an official GeoGebra-project.
 
 ## Demo
 
-Try the demo: https://saunaaa.github.io/react-geogebra
+Try the demo: https://pfaffmann.github.io/react-geogebra
 
 ## Installation
 
