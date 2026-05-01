@@ -1,0 +1,44 @@
+{
+	"name": "react-geogebra",
+	"version": "0.0.0",
+	"description": "A react component to add the GeoGebra Math App to your react project.",
+	"homepage": "https://github.com/pfaffmann/react-geogebra/tree/main/react-geogebra#readme",
+	"bugs": "https://github.com/pfaffmann/react-geogebra/issues",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:pfaffmann/react-geogebra.git",
+		"directory": "react-geogebra"
+	},
+	"license": "MIT",
+	"author": "Ayoub Adib <adbayb@gmail.com> (https://twitter.com/adbayb)",
+	"sideEffects": false,
+	"type": "module",
+	"exports": {
+		".": {
+			"source": "./src/index.ts",
+			"types": "./dist/index.d.ts",
+			"require": "./dist/index.cjs",
+			"import": "./dist/index.mjs",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "pnpm clean && quickbundle build",
+		"clean": "rm -rf dist",
+		"prepublishOnly": "pnpm build",
+		"start": "pnpm watch",
+		"test": "vitest --passWithNoTests --typecheck --reporter=verbose",
+		"watch": "quickbundle watch"
+	},
+	"devDependencies": {
+		"quickbundle": "2.16.0",
+		"vitest": "4.1.5"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org"
+	}
+}

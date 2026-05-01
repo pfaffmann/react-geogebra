@@ -1,0 +1,14 @@
+{
+	"name": "@examples/default",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "tsx ./src/index.ts"
+	},
+	"dependencies": {
+		"react-geogebra": "workspace:^"
+	},
+	"devDependencies": {
+		"tsx": "4.19.1"
+	}
+}
