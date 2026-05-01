@@ -1,0 +1,50 @@
+name: Continous delivery
+
+on:
+    push:
+        branches:
+            - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+    integrate:
+        uses: ./.github/workflows/workflow.yml
+    release:
+        timeout-minutes: 5
+        needs: integrate
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            id-token: write
+            pull-requests: write
+        steps:
+            - uses: actions/checkout@v6
+            - uses: pnpm/action-setup@v5
+            - uses: actions/setup-node@v6
+              with:
+                  cache: pnpm
+                  node-version-file: ".nvmrc"
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+            - name: Publish pre-release version(s)
+              if: "!contains(github.event.head_commit.message, 'chore: release package(s)')"
+              run: |
+                  pnpm --filter="!." --filter="!./(applications|examples|tools)/*" --recursive exec pnpm version "$(pnpm show ./ version)-next-${GITHUB_SHA::7}" --no-git-tag-version
+                  pnpm --filter="!." --filter="!./(applications|examples|tools)/*" --recursive exec pnpm publish --tag next --no-git-checks
+            - name: Create release pull request
+              if: "!contains(github.event.head_commit.message, 'chore: release package(s)')"
+              uses: changesets/action@v1
+              with:
+                  commit: "chore: release package(s)"
+                  title: "chore: release package(s)"
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Publish stable version(s)
+              if: "contains(github.event.head_commit.message, 'chore: release package(s)')"
+              uses: changesets/action@v1
+              with:
+                  version: pnpm release:version
+                  publish: pnpm release:publish
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
