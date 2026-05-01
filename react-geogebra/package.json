@@ -1,6 +1,6 @@
 {
 	"name": "react-geogebra",
-	"version": "0.0.0",
+	"version": "1.2.7",
 	"description": "A react component to add the GeoGebra Math App to your react project.",
 	"homepage": "https://github.com/pfaffmann/react-geogebra/tree/main/react-geogebra#readme",
 	"bugs": "https://github.com/pfaffmann/react-geogebra/issues",
@@ -10,7 +10,6 @@
 		"directory": "react-geogebra"
 	},
 	"license": "MIT",
-	"author": "Ayoub Adib <adbayb@gmail.com> (https://twitter.com/adbayb)",
 	"sideEffects": false,
 	"type": "module",
 	"exports": {
@@ -34,8 +33,13 @@
 		"watch": "quickbundle watch"
 	},
 	"devDependencies": {
+		"@types/react": "19.2.14",
 		"quickbundle": "2.16.0",
+		"react": "19.2.5",
 		"vitest": "4.1.5"
+	},
+	"peerDependencies": {
+		"react": "^19.2.5"
 	},
 	"publishConfig": {
 		"access": "public",
